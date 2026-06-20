@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Api.Middleware;
 using Api.Services;
 using Api.Services.Interfaces;
 using Api.Repositories;
@@ -59,6 +60,8 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<GlobalExceptionMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();

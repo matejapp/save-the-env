@@ -30,11 +30,9 @@ namespace Api.Migrations
                         .HasColumnName("env_id");
 
                     b.Property<string>("EncryptedValue")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Key")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid>("ProjectId")
@@ -97,7 +95,10 @@ namespace Api.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("user_vault_id");
 
-                    b.Property<string>("CannaryValue")
+                    b.Property<string>("CanaryValue")
+                        .HasColumnType("text");
+
+                    b.Property<string>("KdfSalt")
                         .HasColumnType("text");
 
                     b.Property<Guid>("UserId")

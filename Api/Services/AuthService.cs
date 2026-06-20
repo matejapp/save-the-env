@@ -1,6 +1,6 @@
 using Api.Dto.User;
+using Api.Exceptions;
 using Api.Models;
-
 using Api.Repositories.Interfaces;
 using Api.Services.Interfaces;
 
@@ -20,7 +20,7 @@ namespace Api.Services
         public async Task<string> RegisterAsync(RegisterRequestDto dto)
         {
             if (await _authRepo.EmailExistsAsync(dto.Email))
-                throw new InvalidOperationException("Email is already in use.");
+                throw new ConflictException("Email is already in use.");
 
             var user = new User
             {
@@ -38,10 +38,10 @@ namespace Api.Services
         public async Task<string> LoginAsync(LoginRequestDto dto)
         {
             var user = await _authRepo.GetByEmailAsync(dto.Email)
-                ?? throw new UnauthorizedAccessException("Invalid credentials.");
+                ?? throw new UnauthorizedException("Invalid credentials.");
 
             if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
-                throw new UnauthorizedAccessException("Invalid credentials.");
+                throw new UnauthorizedException("Invalid credentials.");
 
             return _jwtTokenService.GenerateJwtToken(user);
         }

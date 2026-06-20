@@ -1,6 +1,7 @@
-using Api.Shared;
+using Api.Exceptions;
 using Api.Models;
 using Api.Repositories.Interfaces;
+using Api.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.Repositories
@@ -23,7 +24,7 @@ namespace Api.Repositories
         {
             var project = await _context.Projects.FirstOrDefaultAsync(p => p.Id == projectId);
             if (project == null)
-                throw new InvalidOperationException("Project not found.");
+                throw new NotFoundException("Project not found.");
             return project;
         }
 
@@ -38,7 +39,7 @@ namespace Api.Repositories
         {
             var project = await _context.Projects.FindAsync(projectId);
             if (project == null)
-                throw new InvalidOperationException("Project not found.");
+                throw new NotFoundException("Project not found.");
             _context.Projects.Remove(project);
             await _context.SaveChangesAsync();
         }

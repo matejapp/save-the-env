@@ -1,3 +1,4 @@
+using Api.Exceptions;
 using Api.Models;
 using Api.Repositories.Interfaces;
 using Api.Shared;
@@ -43,7 +44,7 @@ namespace Api.Repositories
         {
             var envVar = await _context.EnvVars.FindAsync(envId);
             if (envVar == null)
-                throw new InvalidOperationException("Env var not found.");
+                throw new NotFoundException("Env var not found.");
             _context.EnvVars.Remove(envVar);
             await _context.SaveChangesAsync();
         }

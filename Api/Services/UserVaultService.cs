@@ -1,4 +1,5 @@
 using Api.Dto.UserVault;
+using Api.Exceptions;
 using Api.Models;
 using Api.Repositories.Interfaces;
 using Api.Services.Interfaces;
@@ -33,7 +34,7 @@ namespace Api.Services
         public async Task<UserVault> UpdateAsync(Guid userId, UpdateUserVaultDto dto)
         {
             var vault = await _repo.GetByUserIdAsync(userId)
-                ?? throw new InvalidOperationException("User vault not found.");
+                ?? throw new NotFoundException("User vault not found.");
 
             if (dto.CanaryValue != null) vault.CanaryValue = dto.CanaryValue;
             if (dto.KdfSalt != null) vault.KdfSalt = dto.KdfSalt;

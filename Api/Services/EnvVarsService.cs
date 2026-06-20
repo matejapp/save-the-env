@@ -1,4 +1,5 @@
 using Api.Dto.EnvVars;
+using Api.Exceptions;
 using Api.Models;
 using Api.Repositories.Interfaces;
 using Api.Services.Interfaces;
@@ -33,7 +34,7 @@ namespace Api.Services
         public async Task<EnvVars> UpdateAsync(Guid envId, UpdateEnvVarDto dto)
         {
             var envVar = await _repo.GetByIdAsync(envId)
-                ?? throw new InvalidOperationException("Env var not found.");
+                ?? throw new NotFoundException("Env var not found.");
 
             if (dto.Key != null) envVar.Key = dto.Key;
             if (dto.EncryptedValue != null) envVar.EncryptedValue = dto.EncryptedValue;
