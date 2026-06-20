@@ -11,7 +11,6 @@ namespace Api.Models
         public string? Email { get; set; }
         public string? PasswordHash { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CreatedAt { get; set; }
     }
 }

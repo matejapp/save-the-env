@@ -491,3 +491,7 @@ appsettings.json
 .claude
 
 Migrations
+
+# Claude session context
+project-context.md
+session-notes.md
