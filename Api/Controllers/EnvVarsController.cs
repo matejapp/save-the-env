@@ -2,11 +2,13 @@ using Api.Dto.EnvVars;
 using Api.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace Api.Controllers
 {
     [ApiController]
     [Authorize]
+    [EnableRateLimiting("sliding")]
     [Route("api/[controller]")]
     public class EnvVarsController : ControllerBase
     {

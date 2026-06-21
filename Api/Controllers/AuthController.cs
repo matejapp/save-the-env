@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Api.Services.Interfaces;
 using Api.Dto.User;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableRateLimiting("fixed")]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;

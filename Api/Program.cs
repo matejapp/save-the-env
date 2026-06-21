@@ -8,6 +8,8 @@ using Api.Services;
 using Api.Services.Interfaces;
 using Api.Repositories;
 using Api.Repositories.Interfaces;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,26 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("SupabasePostgres"));
+});
+
+//Rate limiter
+builder.Services.AddRateLimiter(options =>
+{
+    options.AddFixedWindowLimiter("fixed", config =>
+    {
+        config.PermitLimit = 10;
+        config.Window = TimeSpan.FromSeconds(12);
+        config.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        config.QueueLimit = 5;
+    });
+
+    options.AddSlidingWindowLimiter("sliding", config =>
+    {
+        config.PermitLimit = 20;
+        config.Window = TimeSpan.FromSeconds(12);
+        config.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        config.QueueLimit = 5;
+    });
 });
 
 //Auth
@@ -53,6 +75,8 @@ builder.Services.AddScoped<IEnvVarsService, EnvVarsService>();
 builder.Services.AddScoped<IEnvVarsRepo, EnvVarsRepo>();
 builder.Services.AddScoped<IUserVaultService, UserVaultService>();
 builder.Services.AddScoped<IUserVaultRepo, UserVaultRepo>();
+
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -69,6 +93,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseRateLimiter();
 app.MapControllers();
 
 
