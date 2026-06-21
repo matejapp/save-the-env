@@ -18,13 +18,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 //CORS
-// builder.Services.AddCors(options =>
-// {
-//     options.AddPolicy("Allow", builder =>
-//     {
-//         builder.WithOrigins("http://localhost:5173/",)
-//     })
-// })
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Allow", policy =>
+        policy.WithOrigins("save-the-env.vercel.app", "http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod());
+});
 
 //Peristence
 var connectionString = builder.Configuration.GetConnectionString("NeonPostgres");
@@ -108,6 +109,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseCors("Allow");
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseRateLimiter();
