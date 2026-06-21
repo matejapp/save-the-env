@@ -1,10 +1,15 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
+COPY Api.sln .
 COPY Api/Api.csproj Api/
-RUN dotnet restore Api/Api.csproj
+COPY Tests/Api.Tests.csproj Tests/
+RUN dotnet restore Api.sln
 
 COPY Api/ Api/
+COPY Tests/ Tests/
+RUN dotnet test Tests/Api.Tests.csproj --no-restore --configuration Release
+
 RUN dotnet publish Api/Api.csproj -c Release -o /app/publish --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime

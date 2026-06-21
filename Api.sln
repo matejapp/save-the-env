@@ -5,6 +5,10 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{65AB6681-C386-474C-84F7-8520F4B6C2E9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0AB3BF05-4346-4AA6-1389-037BE0695223}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Tests", "Tests\Api.Tests.csproj", "{EF8854BC-B611-4047-8641-6E11C32014C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +31,23 @@ Global
 		{65AB6681-C386-474C-84F7-8520F4B6C2E9}.Release|x64.Build.0 = Release|Any CPU
 		{65AB6681-C386-474C-84F7-8520F4B6C2E9}.Release|x86.ActiveCfg = Release|Any CPU
 		{65AB6681-C386-474C-84F7-8520F4B6C2E9}.Release|x86.Build.0 = Release|Any CPU
+		{EF8854BC-B611-4047-8641-6E11C32014C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF8854BC-B611-4047-8641-6E11C32014C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF8854BC-B611-4047-8641-6E11C32014C8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EF8854BC-B611-4047-8641-6E11C32014C8}.Debug|x64.Build.0 = Debug|Any CPU
+		{EF8854BC-B611-4047-8641-6E11C32014C8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EF8854BC-B611-4047-8641-6E11C32014C8}.Debug|x86.Build.0 = Debug|Any CPU
+		{EF8854BC-B611-4047-8641-6E11C32014C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF8854BC-B611-4047-8641-6E11C32014C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF8854BC-B611-4047-8641-6E11C32014C8}.Release|x64.ActiveCfg = Release|Any CPU
+		{EF8854BC-B611-4047-8641-6E11C32014C8}.Release|x64.Build.0 = Release|Any CPU
+		{EF8854BC-B611-4047-8641-6E11C32014C8}.Release|x86.ActiveCfg = Release|Any CPU
+		{EF8854BC-B611-4047-8641-6E11C32014C8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EF8854BC-B611-4047-8641-6E11C32014C8} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 	EndGlobalSection
 EndGlobal
