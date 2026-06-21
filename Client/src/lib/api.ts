@@ -1,3 +1,5 @@
+const API_BASE = import.meta.env.VITE_API_BASE ?? ''
+
 type LogoutFn = () => void
 let onUnauthorized: LogoutFn | null = null
 
@@ -12,7 +14,7 @@ interface RequestOptions extends RequestInit {
 async function request<T>(path: string, options?: RequestOptions): Promise<T | null> {
   const { allowNotFound, ...init } = options ?? {}
   const token = localStorage.getItem('token')
-  const res = await fetch(path, {
+  const res = await fetch(`${API_BASE}${path}`, {
     ...init,
     headers: {
       'Content-Type': 'application/json',

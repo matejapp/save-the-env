@@ -17,6 +17,15 @@ var builder = WebApplication.CreateBuilder(args);
 //Controllers
 builder.Services.AddControllers();
 
+//CORS
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("Allow", builder =>
+//     {
+//         builder.WithOrigins("http://localhost:5173/",)
+//     })
+// })
+
 //Peristence
 var connectionString = builder.Configuration.GetConnectionString("NeonPostgres");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
