@@ -22,7 +22,7 @@ var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Allow", policy =>
-        policy.WithOrigins("save-the-env.vercel.app", "http://localhost:5173")
+        policy.WithOrigins("https://save-the-env.vercel.app", "http://localhost:5173")
               .AllowAnyHeader()
               .AllowAnyMethod());
 });
@@ -102,14 +102,13 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
+app.UseCors("Allow");
 app.UseMiddleware<GlobalExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
-app.UseCors("Allow");
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseRateLimiter();
