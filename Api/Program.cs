@@ -79,6 +79,11 @@ builder.Services.AddScoped<IEnvVarsRepo, EnvVarsRepo>();
 builder.Services.AddScoped<IUserVaultService, UserVaultService>();
 builder.Services.AddScoped<IUserVaultRepo, UserVaultRepo>();
 
+//Health checkpoint
+builder.Services.AddHealthChecks(
+    
+);
+
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -98,6 +103,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseRateLimiter();
 app.MapControllers();
+app.MapHealthChecks("/health");
 
 
 app.Run();
