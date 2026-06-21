@@ -6,7 +6,7 @@ A personal secrets manager for storing environment variables per project. Values
 
 **Backend**
 - .NET 10 Web API
-- Entity Framework Core 10 + Npgsql (PostgreSQL via Supabase)
+- Entity Framework Core 10 + Npgsql (PostgreSQL via Neon)
 - BCrypt.Net for password hashing
 - JWT Bearer authentication (30-minute tokens, HS256)
 - Repository pattern with a service layer
@@ -58,14 +58,14 @@ save-the-env/
 
 ## Running locally
 
-**Prerequisites:** .NET 10 SDK, Node.js 18+, a PostgreSQL database (Supabase free tier works)
+**Prerequisites:** .NET 10 SDK, Node.js 18+, a PostgreSQL database (Neon free tier works)
 
 **Backend**
 
 ```bash
 cd Api
 # add connection string and JWT key to user secrets
-dotnet user-secrets set "ConnectionStrings:SupabasePostgres" "Host=...;Database=...;Username=...;Password=..."
+dotnet user-secrets set "ConnectionStrings:NeonPostgres" "Host=...;Database=...;Username=...;Password=..."
 dotnet user-secrets set "Jwt:Key" "your-secret-key-min-32-chars"
 
 dotnet ef database update

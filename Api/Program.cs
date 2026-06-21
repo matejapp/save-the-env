@@ -1,5 +1,6 @@
 using Api.Shared;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -17,9 +18,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 //Peristence
+var connectionString = builder.Configuration.GetConnectionString("NeonPostgres");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("SupabasePostgres"));
+    options.UseNpgsql(connectionString);
 });
 
 //Rate limiter
@@ -37,6 +39,7 @@ builder.Services.AddRateLimiter(options =>
     {
         config.PermitLimit = 20;
         config.Window = TimeSpan.FromSeconds(12);
+        config.SegmentsPerWindow = 4;
         config.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
         config.QueueLimit = 5;
     });

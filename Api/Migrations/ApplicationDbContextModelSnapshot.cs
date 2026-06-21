@@ -43,7 +43,7 @@ namespace Api.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("EnvVars");
+                    b.ToTable("EnvVars", (string)null);
                 });
 
             modelBuilder.Entity("Api.Models.Project", b =>
@@ -64,7 +64,7 @@ namespace Api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("Api.Models.User", b =>
@@ -85,7 +85,7 @@ namespace Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Api.Models.UserVault", b =>
@@ -109,7 +109,7 @@ namespace Api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserVaults");
+                    b.ToTable("UserVaults", (string)null);
                 });
 
             modelBuilder.Entity("Api.Models.EnvVars", b =>
